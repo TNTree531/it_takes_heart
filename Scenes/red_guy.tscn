@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3qqaawx2ctq1"]
+
+[ext_resource type="Texture2D" uid="uid://bolxg7badwy7f" path="res://Art/icon.svg" id="1_d7f8a"]
+[ext_resource type="Script" path="res://Scripts/red_guy.gd" id="1_r1mwf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_031k6"]
+size = Vector2(58, 58)
+
+[node name="Red_guy" type="CharacterBody2D"]
+script = ExtResource("1_r1mwf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.69549e-06, -3.8147e-06)
+scale = Vector2(0.492188, 0.492188)
+texture = ExtResource("1_d7f8a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_031k6")

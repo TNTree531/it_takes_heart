@@ -16,8 +16,6 @@ offset_bottom = 170.0
 position = Vector2(0, -113)
 
 [node name="Camera2D" type="Camera2D" parent="Red_guy"]
-position_smoothing_enabled = true
-position_smoothing_speed = 7.0
 
 [node name="Floor" type="StaticBody2D" parent="."]
 
