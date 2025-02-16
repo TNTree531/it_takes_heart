@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw5uqins75dbx"]
+
+[ext_resource type="Texture2D" uid="uid://bolxg7badwy7f" path="res://Art/icon.svg" id="1_4hqcl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po87o"]
+atlas = ExtResource("1_4hqcl")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rycp2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po87o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5dc3o"]
+radius = 8.0
+height = 52.0
+
+[node name="Mush_platform" type="RigidBody2D"]
+collision_layer = 3
+collision_mask = 3
+gravity_scale = -1.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3.8147e-06, 1.90735e-06)
+scale = Vector2(0.909758, 0.279926)
+sprite_frames = SubResource("SpriteFrames_rycp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2.11008, 2.11008)
+shape = SubResource("CapsuleShape2D_5dc3o")

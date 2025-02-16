@@ -3,7 +3,7 @@ extends CharacterBody2D
 var stasis = 0
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -900.0
+const JUMP_VELOCITY = -1200.0
 
 
 func _physics_process(delta: float) -> void:
@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 	
 		# Gravity
 		if not is_on_floor():
-			velocity += get_gravity() * (delta * 3 )
+			velocity += get_gravity() * (delta * 4 )
 	move_and_slide()
 	
 
@@ -33,11 +33,11 @@ func handle_stasis():
 	if Input.is_action_just_pressed('red_ability'):
 		if stasis == 1:
 			stasis = 2
-			velocity.y = 1000
+			velocity.y = 1600
 		if stasis == 0:
 			stasis = 1
 			velocity.x = 0
 			velocity.y = 0
 	if stasis == 2 and is_on_floor() == true:
 		stasis = 0
-		velocity.y = JUMP_VELOCITY - 350
+		velocity.y = JUMP_VELOCITY - 500
