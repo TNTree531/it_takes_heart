@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn1mi3tgwcpxi"]
+
+[ext_resource type="Texture2D" uid="uid://bolxg7badwy7f" path="res://Art/icon.svg" id="1_f7nq0"]
+[ext_resource type="Script" path="res://Scripts/purple_guy.gd" id="1_ueg4p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ni4a"]
+size = Vector2(58, 58)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x4ab1"]
+radius = 42.19
+
+[node name="purple_guy" type="CharacterBody2D"]
+script = ExtResource("1_ueg4p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.69549e-06, -3.8147e-06)
+rotation = 3.14159
+scale = Vector2(0.657057, 0.657057)
+texture = ExtResource("1_f7nq0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.44017, 1.44017)
+shape = SubResource("RectangleShape2D_8ni4a")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_x4ab1")
