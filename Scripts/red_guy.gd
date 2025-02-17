@@ -15,32 +15,32 @@ func _physics_process(delta: float) -> void:
 		# Gravity
 		if not is_on_floor():
 			velocity += get_gravity() * (delta * 4 )
-			
-		#set_collision_layer_value(2, true)
-		#set_collision_mask_value(2, false)
-	#else:
-		#set_collision_layer_value(2, false)
-		#set_collision_mask_value(2, true)
+
 	move_and_slide()
 	
 
 func walk():
-	var direction := Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * SPEED
+	if Global.active_player == 'red':
+		var direction := Input.get_axis("left", "right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+		
 		
 func jump():
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Global.active_player == 'red':
+		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
 		
 func handle_stasis():
-	if Input.is_action_just_pressed('red_ability'):
-		if stasis == 1:
+	if Input.is_action_just_pressed('ability'):
+		if stasis == 1 and Global.active_player == 'red':
 			stasis = 2
 			velocity.y = 1600
-		if stasis == 0:
+		if stasis == 0 and Global.active_player == 'red':
 			stasis = 1
 			velocity.x = 0
 			velocity.y = 0

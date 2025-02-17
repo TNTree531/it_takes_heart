@@ -8,7 +8,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	global_position = get_tree().get_root().get_node('Main/Red_guy').global_position
+	if Global.active_player == 'red':
+		global_position = get_tree().get_root().get_node('Main/Red_guy').global_position
+	if Global.active_player == 'purple':
+		global_position = get_tree().get_root().get_node('Main/Purple_guy').global_position
 	
 	if global_position.y <= -2850:
 		get_tree().get_root().get_node('Main/dawn').visible = false

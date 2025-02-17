@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 	#if abs(angular_velocity) < 25:
 		if abs(angular_velocity) >= 0.1:
 			get_tree().get_root().get_node('Main/Red_guy').global_position -= (global_position - get_tree().get_root().get_node('Main/Red_guy').global_position)/(get_tree().get_root().get_node('Main/Red_guy').global_position.distance_to(global_position))*abs(angular_velocity)/1.25
-			print(angular_velocity)
+		
 	#elif angular_velocity > 25: 
 		#angular_velocity = 25
 	#elif angular_velocity < -25:

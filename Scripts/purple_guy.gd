@@ -8,7 +8,6 @@ const JUMP_VELOCITY = -1200.0
 
 func _physics_process(delta: float) -> void:
 	speed_check()
-	handle_stasis()
 	if stasis == 0:
 		walk()
 		jump()
@@ -25,28 +24,20 @@ func _physics_process(delta: float) -> void:
 	
 
 func walk():
-	var direction := Input.get_axis("left", "right")
-	if direction:
-		velocity.x = direction * SPEED
+	if Global.active_player == 'purple':
+		var direction := Input.get_axis("left", "right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+	
 func jump():
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Global.active_player == 'purple':
+		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
 		
-func handle_stasis():
-	if Input.is_action_just_pressed('red_ability'):
-		if stasis == 1:
-			stasis = 2
-			velocity.y = 1600
-		if stasis == 0:
-			stasis = 1
-			velocity.x = 0
-			velocity.y = 0
-	if stasis == 2 and is_on_floor() == true:
-		stasis = 0
-		velocity.y = JUMP_VELOCITY - 505
 		
 func speed_check():
 	if velocity.x >= 2500:
