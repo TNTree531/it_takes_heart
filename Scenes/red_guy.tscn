@@ -6,8 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_031k6"]
 size = Vector2(58, 58)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdtkl"]
-size = Vector2(83, 20)
+[sub_resource type="CircleShape2D" id="CircleShape2D_7rlnd"]
+radius = 42.19
 
 [node name="Red_guy" type="CharacterBody2D"]
 script = ExtResource("1_r1mwf")
@@ -21,11 +21,7 @@ texture = ExtResource("1_d7f8a")
 scale = Vector2(1.44017, 1.44017)
 shape = SubResource("RectangleShape2D_031k6")
 
-[node name="player_weight" type="RigidBody2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-mass = 2.0
+[node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player_weight"]
-position = Vector2(0.5, 34)
-shape = SubResource("RectangleShape2D_tdtkl")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_7rlnd")

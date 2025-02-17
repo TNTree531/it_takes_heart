@@ -11,10 +11,15 @@ func _physics_process(delta: float) -> void:
 	if stasis == 0:
 		walk()
 		jump()
-	
 		# Gravity
 		if not is_on_floor():
 			velocity += get_gravity() * (delta * 4 )
+			
+		#set_collision_layer_value(2, true)
+		#set_collision_mask_value(2, false)
+	#else:
+		#set_collision_layer_value(2, false)
+		#set_collision_mask_value(2, true)
 	move_and_slide()
 	
 
