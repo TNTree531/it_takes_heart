@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmmp0bnva6wef"]
+[gd_scene load_steps=8 format=3 uid="uid://dmmp0bnva6wef"]
 
 [ext_resource type="Texture2D" uid="uid://bolxg7badwy7f" path="res://Art/icon.svg" id="1_88d8y"]
+[ext_resource type="Script" path="res://Scripts/spade.gd" id="1_rly5w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4hlvk"]
+radius = 30.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8cxx"]
 atlas = ExtResource("1_88d8y")
@@ -20,14 +24,46 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_qf10t"]
 radius = 32.0156
 
-[node name="Spade" type="RigidBody2D"]
-gravity_scale = 0.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igh26"]
+
+[node name="Spade" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("1_rly5w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4hlvk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_7822q")
 
-[node name="collision_detector" type="Area2D" parent="."]
+[node name="floor_ceiling_collision_detector" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="collision_detector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor_ceiling_collision_detector"]
 shape = SubResource("CircleShape2D_qf10t")
+
+[node name="other_detector" type="Area2D" parent="."]
+scale = Vector2(0.711237, 0.711237)
+collision_layer = 16
+collision_mask = 144
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="other_detector"]
+scale = Vector2(0.617665, 0.617665)
+shape = SubResource("RectangleShape2D_igh26")
+
+[node name="trigger_timer" type="Timer" parent="."]
+wait_time = 0.025
+one_shot = true
+autostart = true
+
+[node name="reference" type="Node2D" parent="."]
+position = Vector2(0, -57)
+
+[connection signal="body_entered" from="floor_ceiling_collision_detector" to="." method="_on_floor_ceiling_collision_detector_body_entered"]
+[connection signal="area_entered" from="other_detector" to="." method="_on_other_detector_area_entered"]
+[connection signal="body_entered" from="other_detector" to="." method="_on_other_detector_body_entered"]
+[connection signal="timeout" from="trigger_timer" to="." method="_on_trigger_timer_timeout"]

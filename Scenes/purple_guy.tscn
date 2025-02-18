@@ -6,8 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ni4a"]
 size = Vector2(58, 58)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_x4ab1"]
-radius = 42.19
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71h1l"]
 
 [node name="purple_guy" type="CharacterBody2D"]
 script = ExtResource("1_ueg4p")
@@ -22,7 +21,12 @@ texture = ExtResource("1_f7nq0")
 scale = Vector2(1.44017, 1.44017)
 shape = SubResource("RectangleShape2D_8ni4a")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="purple_area" type="Area2D" parent="."]
+collision_layer = 17
+collision_mask = 17
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_x4ab1")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="purple_area"]
+scale = Vector2(4.63877, 4.63877)
+shape = SubResource("RectangleShape2D_71h1l")
+
+[connection signal="area_shape_entered" from="purple_area" to="." method="_on_purple_area_area_shape_entered"]

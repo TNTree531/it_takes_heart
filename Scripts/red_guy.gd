@@ -2,12 +2,15 @@ extends CharacterBody2D
 
 var stasis = 0
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -1200.0
+var SPEED = 300.0
+var JUMP_VELOCITY = -1200.0
 
 
 func _physics_process(delta: float) -> void:
-	speed_check()
+	
+	if SPEED < 300:
+		SPEED += 0.5
+		
 	handle_stasis()
 	if stasis == 0:
 		walk()
@@ -15,9 +18,16 @@ func _physics_process(delta: float) -> void:
 		# Gravity
 		if not is_on_floor():
 			velocity += get_gravity() * (delta * 4 )
+		else:
+			SPEED = 300
 
 	move_and_slide()
 	
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed('recall'):
+		if Global.last_player == 'red' and Global.active_player == 'purple':
+			global_position.y = get_tree().get_root().get_node('Main/Purple_guy').global_position.y - 50
+			global_position.x = get_tree().get_root().get_node('Main/Purple_guy').global_position.x
 
 func walk():
 	if Global.active_player == 'red':
@@ -48,12 +58,18 @@ func handle_stasis():
 		stasis = 0
 		velocity.y = JUMP_VELOCITY - 505
 		
-func speed_check():
-	if velocity.x >= 2500:
-		velocity.x -= 250
-	if velocity.y >= 2500:
-		velocity.y -= 250
-	if velocity.x <= -2500:
-		velocity.x += 250
-	if velocity.y <= -2500:
-		velocity.y += 250
+	
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if stasis == 1 or stasis == 2:
+		stasis = 0
+
+
+func _on_area_2d_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	if stasis == 1 or stasis == 2:
+		stasis = 0
+	if area.name == 'other_detector':
+		print(area.get_parent().velocity)
+		SPEED = 10
+		velocity += 1.25 * (area.get_parent().velocity)
