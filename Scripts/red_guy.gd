@@ -62,6 +62,8 @@ func handle_stasis():
 func handle_animation():
 	if velocity.y < 0:
 		$AnimatedSprite2D.play("jump")
+	elif velocity.y > 0:
+		$AnimatedSprite2D.play("fall")
 	elif velocity.x > 0:
 		$AnimatedSprite2D.play("run")
 		$AnimatedSprite2D.flip_h = false

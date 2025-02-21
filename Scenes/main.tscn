@@ -738,7 +738,7 @@ node_a = NodePath("../../RigidBody2D")
 node_b = NodePath("..")
 
 [node name="Clover_4" type="Node2D" parent="Forest_Floor/clovers"]
-position = Vector2(-477, -2207)
+position = Vector2(-445, -2207)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Forest_Floor/clovers/Clover_4"]
 collision_layer = 130
