@@ -7,7 +7,7 @@ var JUMP_VELOCITY = -1200.0
 
 
 func _physics_process(delta: float) -> void:
-	
+	handle_animation()
 	if SPEED < 300:
 		SPEED += 0.5
 		
@@ -58,7 +58,25 @@ func handle_stasis():
 		stasis = 0
 		velocity.y = JUMP_VELOCITY - 505
 		
-	
+
+func handle_animation():
+	if velocity.y < 0:
+		$AnimatedSprite2D.play("jump")
+	elif velocity.x > 0:
+		$AnimatedSprite2D.play("run")
+		$AnimatedSprite2D.flip_h = false
+	elif velocity.x < 0:
+		$AnimatedSprite2D.play("run")
+		$AnimatedSprite2D.flip_h = true
+	else:
+		$AnimatedSprite2D.play("Idle")
+		
+	if stasis != 0:
+		$heart.modulate.a = 0.5
+		$AnimatedSprite2D.pause()
+	else:
+		$heart.modulate.a = 0.0
+		$AnimatedSprite2D.play()
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
