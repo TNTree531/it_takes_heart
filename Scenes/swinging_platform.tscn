@@ -1,0 +1,139 @@
+[gd_scene load_steps=11 format=3 uid="uid://bo4pvgegigwae"]
+
+[ext_resource type="Script" path="res://Scripts/swinging_plat.gd" id="1_n684s"]
+[ext_resource type="Texture2D" uid="uid://bi54dqx1t6v4o" path="res://Art/Midnight_mine_tile_sheet@2x.png" id="1_sedki"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4jni"]
+atlas = ExtResource("1_sedki")
+region = Rect2(64, 384, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s8ljw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4jni")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hdly5"]
+atlas = ExtResource("1_sedki")
+region = Rect2(128, 384, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_thkyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hdly5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bxo3"]
+atlas = ExtResource("1_sedki")
+region = Rect2(192, 384, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_meoel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bxo3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbu7s"]
+size = Vector2(191, 63.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ngt6"]
+size = Vector2(158, 20)
+
+[node name="Swinging_platform" type="Area2D"]
+script = ExtResource("1_n684s")
+
+[node name="platform" type="RigidBody2D" parent="."]
+collision_layer = 4096
+collision_mask = 4096
+gravity_scale = 0.5
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="platform"]
+position = Vector2(-64, 0)
+sprite_frames = SubResource("SpriteFrames_s8ljw")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="platform"]
+sprite_frames = SubResource("SpriteFrames_thkyi")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="platform"]
+position = Vector2(64, 0)
+sprite_frames = SubResource("SpriteFrames_meoel")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform"]
+position = Vector2(0, -0.25)
+shape = SubResource("RectangleShape2D_tbu7s")
+
+[node name="hook" type="StaticBody2D" parent="."]
+position = Vector2(0, -351)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hook"]
+shape = SubResource("RectangleShape2D_5ngt6")
+
+[node name="chain" type="DampedSpringJoint2D" parent="."]
+modulate = Color(0.18044, 0.200212, 0.189185, 1)
+position = Vector2(0, -349)
+node_a = NodePath("../hook")
+node_b = NodePath("../platform")
+bias = 0.9
+length = 350.0
+rest_length = 350.0
+stiffness = 64.0
+
+[node name="chain3" type="DampedSpringJoint2D" parent="."]
+modulate = Color(0.18044, 0.200212, 0.189185, 1)
+position = Vector2(68, -349)
+node_a = NodePath("../hook")
+node_b = NodePath("../platform")
+bias = 0.9
+length = 350.0
+rest_length = 350.0
+stiffness = 64.0
+
+[node name="chain2" type="DampedSpringJoint2D" parent="."]
+modulate = Color(0.18044, 0.200212, 0.189185, 1)
+position = Vector2(-68, -349)
+node_a = NodePath("../hook")
+node_b = NodePath("../platform")
+bias = 0.9
+length = 350.0
+rest_length = 350.0
+stiffness = 64.0
+
+[node name="chain4" type="DampedSpringJoint2D" parent="."]
+modulate = Color(0.18044, 0.200212, 0.189185, 1)
+position = Vector2(-34, -349)
+node_a = NodePath("../hook")
+node_b = NodePath("../platform")
+bias = 0.9
+length = 350.0
+rest_length = 350.0
+stiffness = 64.0
+
+[node name="chain5" type="DampedSpringJoint2D" parent="."]
+modulate = Color(0.18044, 0.200212, 0.189185, 1)
+position = Vector2(32, -349)
+node_a = NodePath("../hook")
+node_b = NodePath("../platform")
+bias = 0.9
+length = 350.0
+rest_length = 350.0
+stiffness = 64.0
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

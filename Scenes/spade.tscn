@@ -27,6 +27,7 @@ radius = 32.0156
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_igh26"]
 
 [node name="Spade" type="CharacterBody2D"]
+z_index = 1
 scale = Vector2(0.5, 0.5)
 collision_layer = 64
 collision_mask = 64

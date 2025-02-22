@@ -125,7 +125,7 @@ script = ExtResource("1_r1mwf")
 position = Vector2(0.499996, 1.5)
 scale = Vector2(1.6, 1.6)
 sprite_frames = SubResource("SpriteFrames_j87nt")
-animation = &"Idle"
+animation = &"run"
 autoplay = "Idle"
 
 [node name="heart" type="AnimatedSprite2D" parent="."]
@@ -138,14 +138,14 @@ position = Vector2(0.999997, 2)
 scale = Vector2(1.125, 1.125)
 shape = SubResource("RectangleShape2D_031k6")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="red_area" type="Area2D" parent="."]
 collision_layer = 17
 collision_mask = 17
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="red_area"]
 position = Vector2(1.5, 2.5)
 scale = Vector2(3.5, 3.5)
 shape = SubResource("RectangleShape2D_3do0q")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_shape_entered" from="Area2D" to="." method="_on_area_2d_area_shape_entered"]
+[connection signal="area_entered" from="red_area" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_shape_entered" from="red_area" to="." method="_on_area_2d_area_shape_entered"]

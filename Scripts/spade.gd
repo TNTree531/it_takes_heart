@@ -31,7 +31,6 @@ func _physics_process(delta: float) -> void:
 	if modulate.a <= 0:
 		self.queue_free()
 		
-		
 func _on_trigger_timer_timeout() -> void:
 	can_detonate = true
 		
