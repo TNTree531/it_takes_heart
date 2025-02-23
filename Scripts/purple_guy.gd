@@ -6,6 +6,7 @@ extends CharacterBody2D
 var stasis = 0
 var ontop_of = null
 var in_range_of
+var can_shoot = true
 
 var SPEED = 300.0
 var JUMP_VELOCITY = -1200.0
@@ -55,9 +56,12 @@ func jump():
 			velocity.y = JUMP_VELOCITY
 		
 func shoot():
-	var instance = projectile.instantiate()
-	instance.spawnPos = global_position
-	scene.add_child.call_deferred(instance)
+	if can_shoot == true:
+		can_shoot = false
+		$Cooldown.start()
+		var instance = projectile.instantiate()
+		instance.spawnPos = global_position
+		scene.add_child.call_deferred(instance)
 		
 func handle_animation():
 	if ontop_of == null:
@@ -111,3 +115,7 @@ func stacked():
 				ontop_of = get_tree().get_root().get_node('Main/Blue_guy')
 				print(ontop_of)
 	
+
+
+func _on_cooldown_timeout() -> void:
+	can_shoot = true
