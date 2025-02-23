@@ -1,20 +1,20 @@
 [gd_scene load_steps=8 format=3 uid="uid://dmmp0bnva6wef"]
 
-[ext_resource type="Texture2D" uid="uid://bolxg7badwy7f" path="res://Art/icon.svg" id="1_88d8y"]
 [ext_resource type="Script" path="res://Scripts/spade.gd" id="1_rly5w"]
+[ext_resource type="Texture2D" uid="uid://ch7nfsmciw1ut" path="res://Art/spadepng@2x.png" id="2_0kbh3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4hlvk"]
 radius = 30.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a8cxx"]
-atlas = ExtResource("1_88d8y")
-region = Rect2(0, 0, 128, 128)
+[sub_resource type="AtlasTexture" id="AtlasTexture_5adic"]
+atlas = ExtResource("2_0kbh3")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7822q"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a8cxx")
+"texture": SubResource("AtlasTexture_5adic")
 }],
 "loop": true,
 "name": &"default",
@@ -37,7 +37,6 @@ script = ExtResource("1_rly5w")
 shape = SubResource("CircleShape2D_4hlvk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_7822q")
 
 [node name="floor_ceiling_collision_detector" type="Area2D" parent="."]
