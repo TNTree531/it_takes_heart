@@ -29,6 +29,10 @@ func _physics_process(delta: float) -> void:
 			
 	move_and_slide()
 	
+	if global_position.distance_to(get_tree().get_root().get_node('Main/Red_guy').global_position) < 250:
+		if Global.active_list.count('purple') == 0:
+			Global.active_list.append('purple')
+	
 			
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('ability') and Global.active_player == 'purple':

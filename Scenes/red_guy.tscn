@@ -137,7 +137,7 @@ sprite_frames = SubResource("SpriteFrames_s7tvh")
 
 [node name="heart_light" type="PointLight2D" parent="heart"]
 visible = false
-scale = Vector2(3.48136, 3.48136)
+scale = Vector2(3.78085, 3.78085)
 color = Color(0.975442, 0.20296, 1, 1)
 texture = ExtResource("4_iuw87")
 

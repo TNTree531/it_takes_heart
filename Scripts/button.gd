@@ -26,12 +26,12 @@ func _on_area_entered(area: Area2D) -> void:
 		if Global.pressed == false:
 			Global.pressed = true
 			if self.name == 'button2':
-				position.x += 50
+				position.x -= 50
 			else:
 				position.y += 50
 		else:
 			Global.pressed = false
 			if self.name == 'button2':
-				position.x -= 50
+				position.x += 50
 			else:
 				position.y -= 50

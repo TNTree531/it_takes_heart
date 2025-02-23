@@ -15,7 +15,12 @@ func _physics_process(delta: float) -> void:
 	if Global.active_player == 'blue':
 		global_position = get_tree().get_root().get_node('Main/Blue_guy').global_position
 	
-	if global_position.y <= -6500:
+	if global_position.y <= -11000:
+		get_tree().get_root().get_node('Main/dawn').visible = true
+		get_tree().get_root().get_node('Main/night').visible = false
+		get_tree().get_root().get_node('Main/cave').visible = false
+		get_tree().get_root().get_node('Main/Camera2D/player_light').visible = false
+	elif global_position.y <= -6500:
 		get_tree().get_root().get_node('Main/dawn').visible = false
 		get_tree().get_root().get_node('Main/night').visible = false
 		get_tree().get_root().get_node('Main/cave').visible = true

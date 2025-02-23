@@ -79,7 +79,8 @@ func handle_animation():
 			$AnimatedSprite2D.play("Idle")
 			
 		if stasis != 0:
-			$heart/heart_light.visible = true
+			if global_position.y < -6500:
+				$heart/heart_light.visible = true
 			$heart.modulate.a = 0.5
 			$AnimatedSprite2D.pause()
 		else:

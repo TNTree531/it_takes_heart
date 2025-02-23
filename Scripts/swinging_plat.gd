@@ -23,8 +23,8 @@ func _process(delta: float) -> void:
 		
 	if $platform.global_position.distance_to(get_tree().get_root().get_node("Main/Red_guy").global_position) > 200:
 		if $platform.global_position.distance_to(get_tree().get_root().get_node("Main/Purple_guy").global_position) > 200:
-			$platform.set_collision_layer_value(1, false)
-		
+			if $platform.global_position.distance_to(get_tree().get_root().get_node("Main/Blue_guy").global_position) > 200:
+				$platform.set_collision_layer_value(1, false)
 	
 func _on_area_entered(area: Area2D) -> void:
 	$platform.set_collision_layer_value(1, true)
