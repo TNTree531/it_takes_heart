@@ -58,6 +58,10 @@ func handle_stasis():
 		stasis = 0
 		velocity.y = JUMP_VELOCITY - 505
 		
+	if stasis == 1:
+		velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		
 
 func handle_animation():
 	if ontop_of == null:

@@ -11,7 +11,8 @@ var colliding = false
 var bounce_count = 0
 
 func _ready() -> void:
-	global_position = spawnPos
+	global_position.x = spawnPos.x
+	global_position.y = spawnPos.y - 5
 	look_at(get_global_mouse_position())
 	rotate(1.5708)
 	dir = rotation
@@ -29,7 +30,7 @@ func _physics_process(delta: float) -> void:
 		modulate.a -= 0.025
 	
 	if modulate.a <= 0:
-		self.queue_free()
+		$death_timer.start()
 		
 func _on_trigger_timer_timeout() -> void:
 	can_detonate = true
@@ -37,20 +38,29 @@ func _on_trigger_timer_timeout() -> void:
 
 func _on_other_detector_body_entered(body: Node2D) -> void:
 	if bounce_count >= 3:
-		self.queue_free()
+		$death_timer.start()
 	if body.name != 'Purple_guy':
 		rotation = -rotation
 		bounce_count += 1
+		
+	if body.name == 'platform' or body.name == 'cart':
+		$death_timer.start()
 
 func _on_other_detector_area_entered(area: Area2D) -> void:
 	if can_detonate == true or area.name != 'purple_area':
-		self.queue_free()
+		$death_timer.start()
+	
 
 
 func _on_floor_ceiling_collision_detector_body_entered(body: Node2D) -> void:
 	if bounce_count >= 3:
-		self.queue_free()
+		$death_timer.start()
 	if body.name != 'Purple_guy':
 		rotate(3.14159)
 		rotation = rotation * -1
 		bounce_count += 1
+		
+
+
+func _on_death_timer_timeout() -> void:
+	self.queue_free()

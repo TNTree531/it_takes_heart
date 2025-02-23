@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckbko0duraqji"]
+
+[ext_resource type="Texture2D" uid="uid://bi54dqx1t6v4o" path="res://Art/Midnight_mine_tile_sheet@2x.png" id="1_2pteb"]
+[ext_resource type="Script" path="res://Scripts/button.gd" id="1_wina3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5l6e"]
+atlas = ExtResource("1_2pteb")
+region = Rect2(64, 384, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_subvn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5l6e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iykrb"]
+size = Vector2(63, 121)
+
+[node name="button" type="Area2D"]
+z_index = -2
+collision_layer = 145
+collision_mask = 145
+script = ExtResource("1_wina3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_subvn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -27.5)
+shape = SubResource("RectangleShape2D_iykrb")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

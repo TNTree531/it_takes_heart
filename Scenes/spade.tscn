@@ -29,7 +29,7 @@ radius = 32.0156
 [node name="Spade" type="CharacterBody2D"]
 z_index = 1
 scale = Vector2(0.5, 0.5)
-collision_layer = 64
+collision_layer = 4160
 collision_mask = 64
 script = ExtResource("1_rly5w")
 
@@ -50,7 +50,7 @@ shape = SubResource("CircleShape2D_qf10t")
 [node name="other_detector" type="Area2D" parent="."]
 scale = Vector2(0.711237, 0.711237)
 collision_layer = 16
-collision_mask = 144
+collision_mask = 4240
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="other_detector"]
 scale = Vector2(0.617665, 0.617665)
@@ -64,7 +64,12 @@ autostart = true
 [node name="reference" type="Node2D" parent="."]
 position = Vector2(0, -57)
 
+[node name="death_timer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
 [connection signal="body_entered" from="floor_ceiling_collision_detector" to="." method="_on_floor_ceiling_collision_detector_body_entered"]
 [connection signal="area_entered" from="other_detector" to="." method="_on_other_detector_area_entered"]
 [connection signal="body_entered" from="other_detector" to="." method="_on_other_detector_body_entered"]
 [connection signal="timeout" from="trigger_timer" to="." method="_on_trigger_timer_timeout"]
+[connection signal="timeout" from="death_timer" to="." method="_on_death_timer_timeout"]

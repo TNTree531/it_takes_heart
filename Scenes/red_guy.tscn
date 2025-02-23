@@ -119,6 +119,7 @@ size = Vector2(84.7122, 84.7122)
 size = Vector2(29.4774, 29.0341)
 
 [node name="Red_guy" type="CharacterBody2D"]
+collision_layer = 135169
 script = ExtResource("1_r1mwf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
