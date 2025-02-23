@@ -1,0 +1,110 @@
+[gd_scene load_steps=13 format=3 uid="uid://b1kwp5gp82mww"]
+
+[ext_resource type="Script" path="res://Scripts/diamond.gd" id="1_123qi"]
+[ext_resource type="Texture2D" uid="uid://dwdy1xkxfnn8n" path="res://Art/diamond@2x.png" id="2_7m2be"]
+[ext_resource type="Texture2D" uid="uid://bi54dqx1t6v4o" path="res://Art/Midnight_mine_tile_sheet@2x.png" id="3_hw34w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4hlvk"]
+radius = 30.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nggd"]
+atlas = ExtResource("2_7m2be")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7822q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nggd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qf10t"]
+radius = 32.0156
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igh26"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqxxn"]
+size = Vector2(64, 176)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8dcy"]
+atlas = ExtResource("3_hw34w")
+region = Rect2(91, 576, 91, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1i04j"]
+atlas = ExtResource("3_hw34w")
+region = Rect2(91, 608, 91, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dkthh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8dcy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1i04j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Diamond" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 4160
+collision_mask = 64
+script = ExtResource("1_123qi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4hlvk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 0)
+sprite_frames = SubResource("SpriteFrames_7822q")
+
+[node name="floor_ceiling_collision_detector" type="Area2D" parent="."]
+collision_layer = 16384
+collision_mask = 16384
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor_ceiling_collision_detector"]
+shape = SubResource("CircleShape2D_qf10t")
+
+[node name="other_detector" type="Area2D" parent="."]
+scale = Vector2(0.711237, 0.711237)
+collision_layer = 0
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="other_detector"]
+scale = Vector2(0.617665, 0.617665)
+shape = SubResource("RectangleShape2D_igh26")
+
+[node name="trigger_timer" type="Timer" parent="."]
+wait_time = 0.025
+one_shot = true
+autostart = true
+
+[node name="reference" type="Node2D" parent="."]
+position = Vector2(0, -57)
+
+[node name="bridge" type="StaticBody2D" parent="."]
+visible = false
+z_index = -2
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bridge"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_tqxxn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bridge"]
+rotation = -1.5708
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_dkthh")
+
+[connection signal="body_entered" from="floor_ceiling_collision_detector" to="." method="_on_floor_ceiling_collision_detector_body_entered"]
+[connection signal="area_entered" from="other_detector" to="." method="_on_other_detector_area_entered"]
+[connection signal="body_entered" from="other_detector" to="." method="_on_other_detector_body_entered"]
+[connection signal="timeout" from="trigger_timer" to="." method="_on_trigger_timer_timeout"]

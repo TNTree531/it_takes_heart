@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://c3qqaawx2ctq1"]
+[gd_scene load_steps=20 format=3 uid="uid://c3qqaawx2ctq1"]
 
 [ext_resource type="Script" path="res://Scripts/red_guy.gd" id="1_r1mwf"]
 [ext_resource type="Texture2D" uid="uid://bd5cuf8g0urc5" path="res://Art/player_tile_sheet@2x.png" id="2_hqknk"]
 [ext_resource type="Texture2D" uid="uid://bup4gilbuqhfd" path="res://Art/crystal_heart@2x.png" id="3_lkla4"]
+[ext_resource type="Texture2D" uid="uid://dy6c30ddyer2f" path="res://Art/light@2x.png" id="4_iuw87"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rgilx"]
 atlas = ExtResource("2_hqknk")
@@ -133,6 +134,12 @@ autoplay = "Idle"
 position = Vector2(0.499996, 1.5)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_s7tvh")
+
+[node name="heart_light" type="PointLight2D" parent="heart"]
+visible = false
+scale = Vector2(3.48136, 3.48136)
+color = Color(0.975442, 0.20296, 1, 1)
+texture = ExtResource("4_iuw87")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.999997, 2)

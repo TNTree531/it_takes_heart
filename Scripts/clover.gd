@@ -12,4 +12,4 @@ func _process(delta: float) -> void:
 		if abs(angular_velocity) >= 0.1:
 			get_tree().get_root().get_node('Main/Red_guy').global_position -= (global_position - get_tree().get_root().get_node('Main/Red_guy').global_position)/(get_tree().get_root().get_node('Main/Red_guy').global_position.distance_to(global_position))*abs(angular_velocity)/1.25
 			get_tree().get_root().get_node('Main/Purple_guy').global_position -= (global_position - get_tree().get_root().get_node('Main/Purple_guy').global_position)/(get_tree().get_root().get_node('Main/Purple_guy').global_position.distance_to(global_position))*abs(angular_velocity)/1.25
-	
+			get_tree().get_root().get_node('Main/Blue_guy').global_position -= (global_position - get_tree().get_root().get_node('Main/Blue_guy').global_position)/(get_tree().get_root().get_node('Main/Blue_guy').global_position.distance_to(global_position))*abs(angular_velocity)/1.25

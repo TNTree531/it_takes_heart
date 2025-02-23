@@ -79,9 +79,11 @@ func handle_animation():
 			$AnimatedSprite2D.play("Idle")
 			
 		if stasis != 0:
+			$heart/heart_light.visible = true
 			$heart.modulate.a = 0.5
 			$AnimatedSprite2D.pause()
 		else:
+			$heart/heart_light.visible = false
 			$heart.modulate.a = 0.0
 			$AnimatedSprite2D.play()
 	else:
@@ -122,4 +124,8 @@ func stacked():
 		if Global.active_player == 'purple':
 			if global_position.distance_to(get_tree().get_root().get_node('Main/Purple_guy').global_position) < 96:
 				ontop_of = get_tree().get_root().get_node('Main/Purple_guy')
+				print(ontop_of)
+		if Global.active_player == 'blue':
+			if global_position.distance_to(get_tree().get_root().get_node('Main/Blue_guy').global_position) < 96:
+				ontop_of = get_tree().get_root().get_node('Main/Blue_guy')
 				print(ontop_of)

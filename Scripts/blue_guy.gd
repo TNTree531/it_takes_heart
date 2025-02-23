@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var scene = get_tree().get_root().get_node('Main')
-@onready var projectile = load("res://Scenes/spade.tscn")
+@onready var projectile = load("res://Scenes/diamond.tscn")
 
 var stasis = 0
 var ontop_of = null
@@ -31,12 +31,12 @@ func _physics_process(delta: float) -> void:
 	
 			
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed('ability') and Global.active_player == 'purple':
+	if Input.is_action_just_pressed('ability') and Global.active_player == 'blue':
 		shoot()
 		
 
 func walk():
-	if Global.active_player == 'purple':
+	if Global.active_player == 'blue':
 		var direction := Input.get_axis("left", "right")
 		if direction:
 			velocity.x = direction * SPEED
@@ -46,7 +46,7 @@ func walk():
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 func jump():
-	if Global.active_player == 'purple':
+	if Global.active_player == 'blue':
 		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 		
@@ -76,7 +76,7 @@ func handle_animation():
 		elif Input.is_action_just_pressed("right"):
 			$AnimatedSprite2D.flip_h = false
 
-func _on_purple_area_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+func _on_blue_area_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if area.name == 'other_detector':
 		if area.get_parent().can_detonate == true:
 			print(area.get_parent().velocity)
@@ -102,8 +102,8 @@ func stacked():
 			if global_position.distance_to(get_tree().get_root().get_node('Main/Red_guy').global_position) < 96:
 				ontop_of = get_tree().get_root().get_node('Main/Red_guy')
 				print(ontop_of)
-		if Global.active_player == 'blue':
-			if global_position.distance_to(get_tree().get_root().get_node('Main/Blue_guy').global_position) < 96:
-				ontop_of = get_tree().get_root().get_node('Main/Blue_guy')
+		if Global.active_player == 'purple':
+			if global_position.distance_to(get_tree().get_root().get_node('Main/Purple_guy').global_position) < 96:
+				ontop_of = get_tree().get_root().get_node('Main/Purple_guy')
 				print(ontop_of)
 	
