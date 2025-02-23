@@ -19,7 +19,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iykrb"]
-size = Vector2(63, 121)
+size = Vector2(63, 106)
 
 [node name="button" type="Area2D"]
 z_index = -2
@@ -32,7 +32,7 @@ rotation = 1.5708
 sprite_frames = SubResource("SpriteFrames_subvn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -27.5)
+position = Vector2(0.5, -20)
 shape = SubResource("RectangleShape2D_iykrb")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

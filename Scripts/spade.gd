@@ -43,7 +43,7 @@ func _on_other_detector_body_entered(body: Node2D) -> void:
 		rotation = -rotation
 		bounce_count += 1
 		
-	if body.name == 'platform' or body.name == 'cart':
+	if body.name == 'platform' or body.name == 'Cart':
 		$death_timer.start()
 
 func _on_other_detector_area_entered(area: Area2D) -> void:
